@@ -1,0 +1,34 @@
+{
+  "name": "@tnt/reactools",
+  "version": "0.9.0",
+  "description": "React toolkit library focused on nextjs, RSC, tailwind and shadcn",
+  "author": "x0y <x0y@milkyweb.co>",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/@tnt/reactools/forms.cjs",
+  "module": "./dist/@tnt/reactools/forms.js",
+  "exports": {
+    "./forms": {
+      "import": "./dist/@tnt/reactools/forms.js",
+      "require": "./dist/@tnt/reactools/forms.cjs",
+      "types": "./dist/forms.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/@tnt/react-toolkit/utils.js",
+      "require": "./dist/@tnt/react-toolkit/utils.cjs",
+      "types": "./dist/utils.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "rollup": "^4.21.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.5.4"
+  }
+}

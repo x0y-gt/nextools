@@ -1,4 +1,10 @@
 import React from "react";
+// @ts-ignore
+import { useFormState } from "react-dom";
+
+import { useForm, UseFormReturn, FieldValues } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ZodSchema } from "zod";
 
 import { mergeClasses } from "./utils";
 
@@ -63,4 +69,27 @@ export function withFormComponents({
       />
     );
   };
+}
+
+type Action<T, S> = (currentState: S, formData: T) => Promise<S>;
+
+export function useFormWithAction<ST extends FieldValues, AS>(
+  schema: ZodSchema<ST>,
+  defaultValues: ST,
+  action: Action<ST, AS>,
+  initialState: AS,
+): {
+  form: UseFormReturn<ST>;
+  state: AS;
+  formAction: (data: ST) => void;
+  pending: boolean;
+} {
+  const form = useForm<ST>({
+    resolver: zodResolver(schema),
+    defaultValues,
+  });
+
+  const [state, formAction, pending] = useFormState(action, initialState);
+
+  return { form, state, formAction, pending };
 }

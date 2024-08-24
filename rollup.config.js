@@ -1,4 +1,4 @@
-import typescript from "rollup-plugin-typescript2";
+import typescript from "@rollup/plugin-typescript";
 
 export default {
   input: {
@@ -17,6 +17,6 @@ export default {
       entryFileNames: "@tnt/reactools/[name].cjs",
     },
   ],
-  plugins: [typescript({ jsx: true })],
+  plugins: [typescript({ tsconfig: "./tsconfig.json" })],
   external: ["react", "react-dom"],
 };

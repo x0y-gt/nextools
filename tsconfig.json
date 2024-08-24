@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023"],
-    "module": "ESNext",
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ES2015",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "jsx": "react-jsx",
 

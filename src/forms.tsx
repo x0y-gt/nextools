@@ -86,14 +86,13 @@ export function useFormWithAction<ST extends FieldValues, AS>(
   form: UseFormReturn<ST>;
   state: AS;
   formAction: (data: ST) => void;
-  pending: boolean;
 } {
   const form = useForm<ST>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const [state, formAction, pending] = useFormState(action, initialState);
+  const [state, formAction] = useFormState(action, initialState);
 
-  return { form, state, formAction, pending };
+  return { form, state, formAction };
 }

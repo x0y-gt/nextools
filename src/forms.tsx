@@ -8,13 +8,17 @@ import { ZodSchema } from "zod";
 
 import { mergeClasses } from "./utils";
 
+type FormComponentType = React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>
+>;
+
 interface withFormComponentsProps {
-  FormField: typeof React.Component;
-  FormItem: typeof React.Component;
-  FormLabel: typeof React.Component;
-  FormControl: typeof React.Component;
-  FormDescription?: typeof React.Component;
-  FormMessage?: typeof React.Component;
+  FormField: any; // TODO: Fix this type
+  FormItem: FormComponentType;
+  FormLabel: any; // TODO: Fix this type
+  FormControl: any; // TODO: Fix this type
+  FormDescription?: FormComponentType;
+  FormMessage?: FormComponentType;
 }
 
 interface CustomFormFieldProps {
@@ -38,7 +42,7 @@ export function withFormComponents({
   FormControl,
   FormDescription,
   FormMessage,
-}: withFormComponentsProps): Function {
+}: withFormComponentsProps): React.FC<CustomFormFieldProps> {
   // (props: CustomFormFieldProps) => JSX.Element {
   return function CustomFormField({
     name,
@@ -75,7 +79,7 @@ type Action<T, S> = (currentState: S, formData: T) => Promise<S>;
 
 export function useFormWithAction<ST extends FieldValues, AS>(
   schema: ZodSchema<ST>,
-  defaultValues: ST,
+  defaultValues: any,
   action: Action<ST, AS>,
   initialState: AS,
 ): {

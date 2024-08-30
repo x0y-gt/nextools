@@ -75,24 +75,35 @@ export function withFormComponents({
   };
 }
 
-type Action<T, S> = (currentState: S, formData: T) => Promise<S>;
+export interface iActionState {
+  status: string; // TODO: Define a type for this, such as "idle" | "loading" | "success" | "error"
+  data?: FieldValues;
+  message?: string;
+}
 
-export function useFormWithAction<ST extends FieldValues, AS>(
-  schema: ZodSchema<ST>,
+export interface iAction {
+  (prevState: any, formData: FormData): Promise<iActionState>;
+}
+
+export function useFormWithAction<FF extends FieldValues>(
+  schema: ZodSchema<FF>,
   defaultValues: any,
-  action: Action<ST, AS>,
-  initialState: AS,
+  action: iAction,
+  initialState?: iActionState,
 ): {
-  form: UseFormReturn<ST>;
-  state: AS;
-  formAction: (data: ST) => void;
+  form: UseFormReturn<FF>;
+  state: FF;
+  serverAction: (data: FF) => void;
 } {
-  const form = useForm<ST>({
+  const form = useForm<FF>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const [state, formAction] = useFormState(action, initialState);
+  const [state, serverAction] = useFormState(
+    action,
+    initialState || { status: "idle" },
+  );
 
-  return { form, state, formAction };
+  return { form, state, serverAction };
 }

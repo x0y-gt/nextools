@@ -1,12 +1,11 @@
 import React from "react";
-// @ts-ignore
-import { useFormState } from "react-dom";
+import ReactDOM from "react-dom";
 
 import { useForm, UseFormReturn, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodSchema } from "zod";
 
-import { mergeClasses } from "./utils";
+import { mergeClasses } from "../utils";
 
 type FormComponentType = React.ForwardRefExoticComponent<
   React.HTMLAttributes<HTMLDivElement> & React.RefAttributes<HTMLDivElement>
@@ -82,7 +81,7 @@ export interface iActionState {
 }
 
 export interface iAction {
-  (prevState: any, formData: FormData): Promise<iActionState>;
+  (prevState: any, formData: FieldValues): Promise<iActionState>;
 }
 
 export function useFormWithAction<FF extends FieldValues>(
@@ -100,7 +99,8 @@ export function useFormWithAction<FF extends FieldValues>(
     defaultValues,
   });
 
-  const [state, serverAction] = useFormState(
+  // @ts-ignore
+  const [state, serverAction] = ReactDOM.useFormState(
     action,
     initialState || { status: "idle" },
   );

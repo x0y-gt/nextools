@@ -2,7 +2,7 @@ import typescript from "@rollup/plugin-typescript";
 
 export default {
   input: {
-    forms: "src/forms.tsx",
+    forms: "src/forms/index.ts",
     utils: "src/utils.ts",
   },
   output: [

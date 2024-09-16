@@ -5,6 +5,7 @@ export default {
     forms: "src/forms/index.ts",
     utils: "src/utils.ts",
     session: "src/session.ts",
+    auth: "src/auth.ts",
   },
   output: [
     {

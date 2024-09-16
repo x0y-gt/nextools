@@ -1,5 +1,5 @@
 {
-  "name": "@tnt/reactools",
+  "name": "@tnt/nextools",
   "version": "0.9.0",
   "description": "React toolkit library focused on nextjs, RSC, tailwind and shadcn",
   "author": "x0y <x0y@milkyweb.co>",
@@ -22,6 +22,11 @@
       "import": "./dist/@tnt/reactools/session.js",
       "require": "./dist/@tnt/reactools/session.cjs",
       "types": "./dist/session.d.ts"
+    },
+    "./auth": {
+      "import": "./dist/@tnt/reactools/auth.js",
+      "require": "./dist/@tnt/reactools/auth.cjs",
+      "types": "./dist/auth.d.ts"
     }
   },
   "scripts": {

@@ -4,6 +4,7 @@ export default {
   input: {
     forms: "src/forms/index.ts",
     utils: "src/utils.ts",
+    session: "src/session.ts",
   },
   output: [
     {

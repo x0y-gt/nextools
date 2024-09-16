@@ -14,9 +14,14 @@
       "types": "./dist/forms.d.ts"
     },
     "./utils": {
-      "import": "./dist/@tnt/react-toolkit/utils.js",
-      "require": "./dist/@tnt/react-toolkit/utils.cjs",
+      "import": "./dist/@tnt/reactools/utils.js",
+      "require": "./dist/@tnt/reactools/utils.cjs",
       "types": "./dist/utils.d.ts"
+    },
+    "./session": {
+      "import": "./dist/@tnt/reactools/session.js",
+      "require": "./dist/@tnt/reactools/session.cjs",
+      "types": "./dist/session.d.ts"
     }
   },
   "scripts": {
@@ -32,5 +37,8 @@
     "rollup": "^4.21.0",
     "typescript": "^5.5.4",
     "zod": "^3.23.8"
+  },
+  "dependencies": {
+    "iron-session": "^8.0.3"
   }
 }

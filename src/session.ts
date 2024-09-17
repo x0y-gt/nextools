@@ -7,7 +7,7 @@ type sessionOptions = {
   extraOptions?: Record<string, any>;
 };
 
-interface Session {
+export interface Session {
   session: any;
   set: (key: string, value: any) => Promise<void>;
   get: (key: string) => any;
@@ -21,6 +21,7 @@ export async function getSession(opts: sessionOptions): Promise<Session> {
   if (opts.type === "iron") {
     if (
       "extraOptions" in opts === false ||
+      !opts.extraOptions ||
       "cookies" in opts.extraOptions === false
     )
       throw new Error("Missing extraOptions.cookies for iron session");

@@ -6,17 +6,19 @@ export default {
     utils: "src/utils.ts",
     session: "src/session.ts",
     auth: "src/auth.ts",
+    location: "src/location.ts",
+    recaptcha: "src/recaptcha/index.ts",
   },
   output: [
     {
       dir: "dist",
       format: "esm",
-      entryFileNames: "@tnt/reactools/[name].js",
+      entryFileNames: "@tnt/nextools/[name].js",
     },
     {
       dir: "dist",
       format: "cjs",
-      entryFileNames: "@tnt/reactools/[name].cjs",
+      entryFileNames: "@tnt/nextools/[name].cjs",
     },
   ],
   plugins: [typescript({ tsconfig: "./tsconfig.json" })],

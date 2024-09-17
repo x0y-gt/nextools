@@ -27,6 +27,16 @@
       "import": "./dist/@tnt/reactools/auth.js",
       "require": "./dist/@tnt/reactools/auth.cjs",
       "types": "./dist/auth.d.ts"
+    },
+    "./location": {
+      "import": "./dist/@tnt/reactools/location.js",
+      "require": "./dist/@tnt/reactools/location.cjs",
+      "types": "./dist/location.d.ts"
+    },
+    "./recaptcha": {
+      "import": "./dist/@tnt/reactools/recaptcha.js",
+      "require": "./dist/@tnt/reactools/recaptcha.cjs",
+      "types": "./dist/recaptcha.d.ts"
     }
   },
   "scripts": {
@@ -44,6 +54,8 @@
     "zod": "^3.23.8"
   },
   "dependencies": {
-    "iron-session": "^8.0.3"
+    "iron-session": "^8.0.3",
+    "node-ipinfo": "^3.5.3",
+    "react-google-recaptcha": "^3.1.0"
   }
 }

@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import commonjs from "@rollup/plugin-commonjs";
 
 export default {
   input: {
@@ -21,6 +22,14 @@ export default {
       entryFileNames: "@tnt/nextools/[name].cjs",
     },
   ],
-  plugins: [typescript({ tsconfig: "./tsconfig.json" })],
-  external: ["react", "react-dom"],
+  plugins: [typescript({ tsconfig: "./tsconfig.json" }), commonjs()],
+  external: [
+    "react",
+    "react-dom",
+    "react-hook-form",
+    "zod",
+    "iron-session",
+    "node-ipinfo",
+    "react-google-recaptcha",
+  ],
 };

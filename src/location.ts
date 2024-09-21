@@ -1,4 +1,4 @@
-import IPinfoWrapper, { IPinfo } from "node-ipinfo";
+import { IPinfoWrapper, IPinfo } from "node-ipinfo";
 
 interface IpLocator {
   getLocation: (ip: string) => Promise<IPinfo>;

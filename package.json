@@ -5,37 +5,37 @@
   "author": "x0y <x0y@milkyweb.co>",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/@tnt/reactools/forms.cjs",
-  "module": "./dist/@tnt/reactools/forms.js",
+  "main": "./dist/@tnt/nextools/forms.cjs",
+  "module": "./dist/@tnt/nextools/forms.js",
   "exports": {
     "./forms": {
-      "import": "./dist/@tnt/reactools/forms.js",
-      "require": "./dist/@tnt/reactools/forms.cjs",
+      "import": "./dist/@tnt/nextools/forms.js",
+      "require": "./dist/@tnt/nextools/forms.cjs",
       "types": "./dist/forms.d.ts"
     },
     "./utils": {
-      "import": "./dist/@tnt/reactools/utils.js",
-      "require": "./dist/@tnt/reactools/utils.cjs",
+      "import": "./dist/@tnt/nextools/utils.js",
+      "require": "./dist/@tnt/nextools/utils.cjs",
       "types": "./dist/utils.d.ts"
     },
     "./session": {
-      "import": "./dist/@tnt/reactools/session.js",
-      "require": "./dist/@tnt/reactools/session.cjs",
+      "import": "./dist/@tnt/nextools/session.js",
+      "require": "./dist/@tnt/nextools/session.cjs",
       "types": "./dist/session.d.ts"
     },
     "./auth": {
-      "import": "./dist/@tnt/reactools/auth.js",
-      "require": "./dist/@tnt/reactools/auth.cjs",
+      "import": "./dist/@tnt/nextools/auth.js",
+      "require": "./dist/@tnt/nextools/auth.cjs",
       "types": "./dist/auth.d.ts"
     },
     "./location": {
-      "import": "./dist/@tnt/reactools/location.js",
-      "require": "./dist/@tnt/reactools/location.cjs",
+      "import": "./dist/@tnt/nextools/location.js",
+      "require": "./dist/@tnt/nextools/location.cjs",
       "types": "./dist/location.d.ts"
     },
     "./recaptcha": {
-      "import": "./dist/@tnt/reactools/recaptcha.js",
-      "require": "./dist/@tnt/reactools/recaptcha.cjs",
+      "import": "./dist/@tnt/nextools/recaptcha.js",
+      "require": "./dist/@tnt/nextools/recaptcha.cjs",
       "types": "./dist/recaptcha.d.ts"
     }
   },
@@ -45,17 +45,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "iron-session": "^8.0.3",
+    "node-ipinfo": "^3.5.3",
+    "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.52.2",
     "rollup": "^4.21.0",
     "typescript": "^5.5.4",
     "zod": "^3.23.8"
-  },
-  "dependencies": {
-    "iron-session": "^8.0.3",
-    "node-ipinfo": "^3.5.3",
-    "react-google-recaptcha": "^3.1.0"
   }
 }

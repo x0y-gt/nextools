@@ -7,7 +7,9 @@
   "type": "module",
   "main": "./dist/@tnt/nextools/forms.cjs",
   "module": "./dist/@tnt/nextools/forms.js",
+  "types": "./dist/@tnt/nextools/types.d.ts",
   "exports": {
+    "./types": "./dist/@tnt/nextools/types.d.ts",
     "./forms": {
       "import": "./dist/@tnt/nextools/forms.js",
       "require": "./dist/@tnt/nextools/forms.cjs",
@@ -55,6 +57,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.52.2",
     "rollup": "^4.21.0",
+    "rollup-plugin-dts": "^6.1.1",
     "typescript": "^5.5.4",
     "zod": "^3.23.8"
   }

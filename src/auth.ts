@@ -1,6 +1,6 @@
 import { Session } from "./session";
 
-interface Auth {
+export interface Auth {
   signIn: (user: Record<string, any>) => Promise<void>;
   signOut: () => Promise<void>;
   isLoggedIn: () => boolean;

@@ -22,8 +22,8 @@ interface withFormComponentsProps {
 
 interface CustomFormFieldProps {
   name: string;
-  label?: string;
-  description?: React.ReactNode;
+  label?: React.ReactNode | string;
+  description?: React.ReactNode | string;
   className?: string | string[];
   render: (field: any) => React.ReactElement;
 }
@@ -45,9 +45,9 @@ export function withFormComponents({
   // (props: CustomFormFieldProps) => JSX.Element {
   return function CustomFormField({
     name,
-    label,
-    description,
-    className,
+    label = "",
+    description = "",
+    className = "",
     render,
   }: CustomFormFieldProps) {
     return (
@@ -55,7 +55,7 @@ export function withFormComponents({
         key={name}
         name={name}
         render={({ field }: any) => (
-          <FormItem className={mergeClasses("form-item", className || "")}>
+          <FormItem className={mergeClasses("form-item", className)}>
             {label && <FormLabel>{label}</FormLabel>}
             <FormControl>
               {/*React.cloneElement(input as React.ReactElement<any>, { ...field })*/}

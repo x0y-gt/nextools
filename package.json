@@ -9,36 +9,36 @@
   "module": "./dist/@tnt/nextools/forms.js",
   "types": "./dist/@tnt/nextools/types.d.ts",
   "exports": {
-    "./types": "./dist/@tnt/nextools/types.d.ts",
+    "./types": "./dist/@tnt/nextools/index.d.ts",
     "./forms": {
       "import": "./dist/@tnt/nextools/forms.js",
       "require": "./dist/@tnt/nextools/forms.cjs",
-      "types": "./dist/forms.d.ts"
+      "types": "./dist/@tnt/nextools/forms.d.ts"
     },
     "./utils": {
       "import": "./dist/@tnt/nextools/utils.js",
       "require": "./dist/@tnt/nextools/utils.cjs",
-      "types": "./dist/utils.d.ts"
+      "types": "./dist/@tnt/nextools/utils.d.ts"
     },
     "./session": {
       "import": "./dist/@tnt/nextools/session.js",
       "require": "./dist/@tnt/nextools/session.cjs",
-      "types": "./dist/session.d.ts"
+      "types": "./dist/@tnt/nextools/session.d.ts"
     },
     "./auth": {
       "import": "./dist/@tnt/nextools/auth.js",
       "require": "./dist/@tnt/nextools/auth.cjs",
-      "types": "./dist/auth.d.ts"
+      "types": "./dist/@tnt/nextools/auth.d.ts"
     },
     "./location": {
       "import": "./dist/@tnt/nextools/location.js",
       "require": "./dist/@tnt/nextools/location.cjs",
-      "types": "./dist/location.d.ts"
+      "types": "./dist/@tnt/nextools/location.d.ts"
     },
     "./recaptcha": {
       "import": "./dist/@tnt/nextools/recaptcha.js",
       "require": "./dist/@tnt/nextools/recaptcha.cjs",
-      "types": "./dist/recaptcha.d.ts"
+      "types": "./dist/@tnt/nextools/recaptcha.d.ts"
     }
   },
   "scripts": {

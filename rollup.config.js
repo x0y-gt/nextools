@@ -21,39 +21,54 @@ export default [
       auth: "src/auth.ts",
       location: "src/location.ts",
       recaptcha: "src/recaptcha/index.ts",
+      index: "src/index.ts", // Main entry point
     },
     output: [
       {
         dir: "dist",
         format: "esm",
         entryFileNames: "@tnt/nextools/[name].js",
+        sourcemap: true,
       },
       {
         dir: "dist",
         format: "cjs",
         entryFileNames: "@tnt/nextools/[name].cjs",
+        sourcemap: true,
       },
     ],
     plugins: [typescript({ tsconfig: "./tsconfig.json" })],
     external,
   },
+  // {
+  //   input: "src/index.ts",
+  //   output: [
+  //     {
+  //       file: "dist/@tnt/nextools/index.js",
+  //       format: "es",
+  //     },
+  //   ],
+  //   plugins: [typescript({ tsconfig: "./tsconfig.json" })],
+  //   external,
+  // },
   {
-    input: "src/index.ts",
+    input: {
+      forms: "dist/forms/index.d.ts",
+      recaptcha: "dist/recaptcha/index.d.ts",
+      utils: "dist/utils.d.ts",
+      session: "dist/session.d.ts",
+      auth: "dist/auth.d.ts",
+      location: "dist/location.d.ts",
+      index: "dist/index.d.ts", // Main entry point
+    },
     output: [
       {
-        file: "dist/@tnt/nextools/index.js",
+        dir: "dist",
         format: "es",
+        entryFileNames: "@tnt/nextools/[name].d.ts",
       },
     ],
-    plugins: [typescript({ tsconfig: "./tsconfig.json" })],
-    external,
-  },
-  {
-    input: "dist/@tnt/nextools/index.d.ts", // Point to a single entry for declaration
-    output: {
-      file: "dist/@tnt/nextools/types.d.ts", // Single output .d.ts file
-      format: "es",
-    },
     plugins: [dts()],
+    external,
   },
 ];

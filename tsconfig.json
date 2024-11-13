@@ -13,6 +13,8 @@
     "jsx": "react-jsx",
 
     "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,

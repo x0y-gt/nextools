@@ -24,6 +24,7 @@ export default [
       location: "src/location.ts",
       recaptcha: "src/recaptcha/index.ts",
       files: "src/files/index.tsx",
+      filesService: "src/files/service.ts",
       index: "src/index.ts", // Main entry point
     },
     output: [
@@ -52,6 +53,7 @@ export default [
       auth: "dist/auth.d.ts",
       location: "dist/location.d.ts",
       files: "dist/files/index.d.ts",
+      filesService: "dist/files/service.d.ts",
       index: "dist/index.d.ts", // Main entry point
     },
     output: [

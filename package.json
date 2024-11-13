@@ -44,6 +44,11 @@
       "import": "./dist/@tnt/nextools/files.js",
       "require": "./dist/@tnt/nextools/files.cjs",
       "types": "./dist/@tnt/nextools/files.d.ts"
+    },
+    "./files/service": {
+      "import": "./dist/@tnt/nextools/filesService.js",
+      "require": "./dist/@tnt/nextools/filesService.cjs",
+      "types": "./dist/@tnt/nextools/filesService.d.ts"
     }
   },
   "scripts": {

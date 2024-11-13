@@ -1,4 +1,4 @@
-import { S3 } from "aws-sdk";
+import AWS, { S3 } from "aws-sdk";
 
 interface UploadConfig {
   bucket: string;
@@ -21,7 +21,7 @@ interface UploadService {
 
 export const createUploadService = (config: UploadConfig): UploadService => {
   const s3 = new S3({
-    endpoint: new S3.Endpoint(config.endpoint),
+    endpoint: new AWS.Endpoint(config.endpoint),
     accessKeyId: config.accessKeyId,
     secretAccessKey: config.secretAccessKey,
   });

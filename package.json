@@ -39,6 +39,11 @@
       "import": "./dist/@tnt/nextools/recaptcha.js",
       "require": "./dist/@tnt/nextools/recaptcha.cjs",
       "types": "./dist/@tnt/nextools/recaptcha.d.ts"
+    },
+    "./files": {
+      "import": "./dist/@tnt/nextools/files.js",
+      "require": "./dist/@tnt/nextools/files.cjs",
+      "types": "./dist/@tnt/nextools/files.d.ts"
     }
   },
   "scripts": {

@@ -9,6 +9,8 @@ const external = [
   "iron-session",
   "node-ipinfo",
   "react-google-recaptcha",
+  "react-icons",
+  "aws-sdk",
 ];
 
 // TODO: delete all unnecessary .d.ts files in dist folder
@@ -21,6 +23,7 @@ export default [
       auth: "src/auth.ts",
       location: "src/location.ts",
       recaptcha: "src/recaptcha/index.ts",
+      files: "src/files/index.tsx",
       index: "src/index.ts", // Main entry point
     },
     output: [
@@ -28,29 +31,18 @@ export default [
         dir: "dist",
         format: "esm",
         entryFileNames: "@tnt/nextools/[name].js",
-        sourcemap: true,
+        // sourcemap: true,
       },
       {
         dir: "dist",
         format: "cjs",
         entryFileNames: "@tnt/nextools/[name].cjs",
-        sourcemap: true,
+        // sourcemap: true,
       },
     ],
     plugins: [typescript({ tsconfig: "./tsconfig.json" })],
     external,
   },
-  // {
-  //   input: "src/index.ts",
-  //   output: [
-  //     {
-  //       file: "dist/@tnt/nextools/index.js",
-  //       format: "es",
-  //     },
-  //   ],
-  //   plugins: [typescript({ tsconfig: "./tsconfig.json" })],
-  //   external,
-  // },
   {
     input: {
       forms: "dist/forms/index.d.ts",
@@ -59,6 +51,7 @@ export default [
       session: "dist/session.d.ts",
       auth: "dist/auth.d.ts",
       location: "dist/location.d.ts",
+      files: "dist/files/index.d.ts",
       index: "dist/index.d.ts", // Main entry point
     },
     output: [

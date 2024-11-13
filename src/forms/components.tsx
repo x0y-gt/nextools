@@ -54,21 +54,31 @@ export function withFormComponents({
       <FormField
         key={name}
         name={name}
-        render={({ field }: any) => (
-          <FormItem className={mergeClasses("form-item", className)}>
-            {label && <FormLabel>{label}</FormLabel>}
-            <FormControl>
-              {/*React.cloneElement(input as React.ReactElement<any>, { ...field })*/}
-              {render(field)}
-            </FormControl>
-            {description && FormDescription && (
-              <FormDescription className="form-item-description">
-                {description}
-              </FormDescription>
-            )}
-            {FormMessage && <FormMessage className="form-item-message" />}
-          </FormItem>
-        )}
+        render={({ field }: any) => {
+          if (
+            field &&
+            typeof field === "object" &&
+            "value" in field &&
+            field.value === null
+          )
+            field.value = ""; // Set to an empty string to avoid warnings
+
+          return (
+            <FormItem className={mergeClasses("form-item", className)}>
+              {label && <FormLabel>{label}</FormLabel>}
+              <FormControl>
+                {/*React.cloneElement(input as React.ReactElement<any>, { ...field })*/}
+                {render(field)}
+              </FormControl>
+              {description && FormDescription && (
+                <FormDescription className="form-item-description">
+                  {description}
+                </FormDescription>
+              )}
+              {FormMessage && <FormMessage className="form-item-message" />}
+            </FormItem>
+          );
+        }}
       />
     );
   };

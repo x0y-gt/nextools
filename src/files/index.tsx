@@ -13,6 +13,7 @@ interface FileUploaderProps {
 }
 
 type FileItem = {
+  id?: string;
   file?: File;
   preview: string | null;
   isDefault?: boolean;
@@ -31,9 +32,13 @@ const FileUploader = forwardRef(
   ) => {
     const [fileItems, setFileItems] = useState<FileItem[]>(
       (defaultFiles || []).map((url) => ({
+        id: url,
         preview: url,
         isDefault: true,
       })),
+    );
+    const [deletedDefaultFiles, setDeletedDefaultFiles] = useState<string[]>(
+      [],
     );
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error state
 
@@ -96,20 +101,33 @@ const FileUploader = forwardRef(
     );
 
     // Handle removing a file
-    const handleRemoveFile = useCallback((fileIndex: number) => {
-      setFileItems((prevFiles) =>
-        prevFiles.filter((_, index) => index !== fileIndex),
-      );
-    }, []);
+    const handleRemoveFile = useCallback(
+      (index: number) => {
+        // Get the item to remove
+        const itemToRemove = fileItems[index];
+
+        // Remove the item from fileItems
+        setFileItems((prevItems) => prevItems.filter((_, i) => i !== index));
+
+        // If it's a default file, add its ID to the deleted list
+        if (itemToRemove.isDefault && itemToRemove.id) {
+          setDeletedDefaultFiles((prevDeleted) => [
+            ...prevDeleted,
+            itemToRemove.id!,
+          ]);
+        }
+      },
+      [fileItems],
+    );
 
     // Function to get files, exposed via ref
     const getFiles = useCallback(async () => {
       const newFiles = fileItems.filter((item) => !item.isDefault && item.file);
-      if (newFiles.length === 0) return;
+      if (newFiles.length === 0) return null;
 
       const formData = new FormData();
       newFiles.forEach((item) => {
-        if (item.file) formData.append("files", item.file);
+        formData.append("files", item.file!);
       });
       return formData;
     }, [fileItems]);
@@ -117,6 +135,7 @@ const FileUploader = forwardRef(
     // Expose the getFiles function to be called externally via ref
     useImperativeHandle(ref, () => ({
       getFiles,
+      getDeletedFiles: () => deletedDefaultFiles,
     }));
 
     // Determine if the upload button should be disabled

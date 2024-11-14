@@ -9,7 +9,14 @@ interface FileUploaderProps {
   className?: string;
   acceptedFileTypes?: string[]; // New prop to specify accepted media types
   maxFileSize?: number; // New prop to specify the maximum file size in bytes
+  defaultFiles?: string[]; // Array of default file URLs
 }
+
+type FileItem = {
+  file?: File;
+  preview: string | null;
+  isDefault?: boolean;
+};
 
 const FileUploader = forwardRef(
   (
@@ -18,11 +25,16 @@ const FileUploader = forwardRef(
       className = "",
       acceptedFileTypes = ["image/png", "image/jpeg", "image/webp"],
       maxFileSize = 10 * 1024 * 1024, // Default to 10MB
+      defaultFiles = [],
     }: FileUploaderProps,
     ref,
   ) => {
-    const [files, setFiles] = useState<File[]>([]);
-    const [previews, setPreviews] = useState<(string | null)[]>([]); // For previewing files
+    const [fileItems, setFileItems] = useState<FileItem[]>(
+      (defaultFiles || []).map((url) => ({
+        preview: url,
+        isDefault: true,
+      })),
+    );
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Error state
 
     // Handle file selection with validation
@@ -32,12 +44,8 @@ const FileUploader = forwardRef(
 
         if (event.target.files) {
           const uploadedFiles = Array.from(event.target.files);
-          const newFiles: File[] = [];
-          const newPreviews: (string | null)[] = [];
-
-          // Calculate how many more files can be added
           const remainingSlots = maxFiles
-            ? maxFiles - files.length
+            ? maxFiles - fileItems.length
             : uploadedFiles.length;
 
           if (remainingSlots <= 0) {
@@ -45,8 +53,8 @@ const FileUploader = forwardRef(
             return;
           }
 
-          // Limit the number of files to the remaining slots
           const filesToProcess = uploadedFiles.slice(0, remainingSlots);
+          const newFileItems: FileItem[] = [];
 
           filesToProcess.forEach((file) => {
             // Validate file type
@@ -71,44 +79,40 @@ const FileUploader = forwardRef(
             }
 
             // If valid, push to arrays for preview and upload
-            newFiles.push(file);
-
-            // Create previews for images, null for non-images
-            if (file.type.startsWith("image/")) {
-              newPreviews.push(URL.createObjectURL(file));
-            } else {
-              newPreviews.push(null);
-            }
+            newFileItems.push({
+              file,
+              preview: file.type.startsWith("image/")
+                ? URL.createObjectURL(file)
+                : null,
+              isDefault: false,
+            });
           });
 
           // Append valid files to existing state
-          setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-          setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+          setFileItems((prevItems) => [...prevItems, ...newFileItems]);
         }
       },
-      [files.length, maxFiles, acceptedFileTypes, maxFileSize],
+      [fileItems.length, maxFiles, acceptedFileTypes, maxFileSize],
     );
 
     // Handle removing a file
     const handleRemoveFile = useCallback((fileIndex: number) => {
-      setPreviews((prevPreviews) =>
-        prevPreviews.filter((_, index) => index !== fileIndex),
-      );
-      setFiles((prevFiles) =>
+      setFileItems((prevFiles) =>
         prevFiles.filter((_, index) => index !== fileIndex),
       );
     }, []);
 
     // Function to get files, exposed via ref
     const getFiles = useCallback(async () => {
-      if (files.length === 0) return;
+      const newFiles = fileItems.filter((item) => !item.isDefault && item.file);
+      if (newFiles.length === 0) return;
 
       const formData = new FormData();
-      files.forEach((file) => {
-        formData.append(`files`, file);
+      newFiles.forEach((item) => {
+        if (item.file) formData.append("files", item.file);
       });
       return formData;
-    }, [files]);
+    }, [fileItems]);
 
     // Expose the getFiles function to be called externally via ref
     useImperativeHandle(ref, () => ({
@@ -116,39 +120,32 @@ const FileUploader = forwardRef(
     }));
 
     // Determine if the upload button should be disabled
-    const isUploadDisabled = maxFiles ? files.length >= maxFiles : false;
+    const isUploadDisabled = maxFiles ? fileItems.length >= maxFiles : false;
 
     return (
       <div className={`${className} overflow-hidden h-full flex flex-col`}>
         <div className="flex-1 flex flex-wrap gap-2">
           {/* Render uploaded files */}
-          {files.map((file, index) => (
+          {fileItems.map((item, index) => (
             <div
               key={index}
               className="relative group flex-1 min-w-[100px] max-w-[calc(33%-8px)]"
             >
               <div className="relative w-full h-full rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
-                {previews[index] ? (
+                {item.preview ? (
                   <img
-                    alt={file.name}
-                    src={previews[index]!}
+                    alt={`File ${index + 1}`}
+                    src={item.preview}
                     className="object-cover"
                   />
+                ) : item.file?.type === "application/pdf" ? (
+                  <PdfIcon className="h-12 w-12 text-gray-500" />
                 ) : (
-                  // Show an icon based on the file type
-                  <div className="text-gray-500">
-                    {file.type === "application/pdf" ? (
-                      <PdfIcon className="h-12 w-12" />
-                    ) : (
-                      <FileIcon className="h-12 w-12" />
-                    )}
-                  </div>
+                  <FileIcon className="h-12 w-12 text-gray-500" />
                 )}
               </div>
-
-              {/* Remove Button */}
               <button
-                className="absolute top-1 right-1 bg-gray-800 bg-opacity-50 p-1 rounded-full text-white opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 ..."
                 onClick={() => handleRemoveFile(index)}
                 type="button"
               >

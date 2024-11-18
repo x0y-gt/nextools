@@ -49,6 +49,11 @@
       "import": "./dist/@tnt/nextools/filesService.js",
       "require": "./dist/@tnt/nextools/filesService.cjs",
       "types": "./dist/@tnt/nextools/filesService.d.ts"
+    },
+    "./formatters": {
+      "import": "./dist/@tnt/nextools/formatters.js",
+      "require": "./dist/@tnt/nextools/formatters.cjs",
+      "types": "./dist/@tnt/nextools/formatters.d.ts"
     }
   },
   "scripts": {

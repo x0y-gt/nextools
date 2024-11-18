@@ -25,6 +25,7 @@ export default [
       recaptcha: "src/recaptcha/index.ts",
       files: "src/files/index.tsx",
       filesService: "src/files/service.ts",
+      formatters: "src/formatters.ts",
       index: "src/index.ts", // Main entry point
     },
     output: [
@@ -54,6 +55,7 @@ export default [
       location: "dist/location.d.ts",
       files: "dist/files/index.d.ts",
       filesService: "dist/files/service.d.ts",
+      formatter: "dist/formatters.d.ts",
       index: "dist/index.d.ts", // Main entry point
     },
     output: [

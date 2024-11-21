@@ -142,59 +142,52 @@ const FileUploader = forwardRef(
     const isUploadDisabled = maxFiles ? fileItems.length >= maxFiles : false;
 
     return (
-      <div className={`${className} overflow-hidden h-full flex flex-col`}>
-        <div className="flex-1 flex flex-wrap gap-2">
-          {/* Render uploaded files */}
-          {fileItems.map((item, index) => (
-            <div
-              key={index}
-              className="relative group flex-1 min-w-[100px] max-w-[calc(33%-8px)]"
-            >
-              <div className="relative w-full h-full rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
-                {item.preview ? (
-                  <img
-                    alt={`File ${index + 1}`}
-                    src={item.preview}
-                    className="object-cover"
-                  />
-                ) : item.file?.type === "application/pdf" ? (
-                  <PdfIcon className="h-12 w-12 text-gray-500" />
-                ) : (
-                  <FileIcon className="h-12 w-12 text-gray-500" />
-                )}
-              </div>
-              <button
-                className="absolute top-1 right-1 ..."
-                onClick={() => handleRemoveFile(index)}
-                type="button"
-              >
-                <RemoveIcon className="h-4 w-4" />
-              </button>
+      <div
+        className={`grid grid-cols-1 gap-2 md:grid-cols-2 lg:gap-4 lg:grid-cols-3 xl:grid-cols-4 ${className}`}
+      >
+        {/* Render uploaded files */}
+        {fileItems.map((item, index) => (
+          <div
+            key={index}
+            className="relative aspect-square border border-gray-100"
+          >
+            <div className="relative flex items-center bg-gray-100">
+              {item.preview ? (
+                <img
+                  alt={`File ${index + 1}`}
+                  src={item.preview}
+                  className="object-cover"
+                />
+              ) : item.file?.type === "application/pdf" ? (
+                <PdfIcon className="h-12 w-12 text-gray-500" />
+              ) : (
+                <FileIcon className="h-12 w-12 text-gray-500" />
+              )}
             </div>
-          ))}
-
-          {/* Upload Button */}
-          {!isUploadDisabled && (
-            <label
-              className={`relative flex-1 min-w-[100px] max-w-[calc(33%-8px)] flex items-center justify-center rounded-md border border-dashed ${
-                isUploadDisabled
-                  ? "cursor-not-allowed opacity-50"
-                  : "cursor-pointer"
-              }`}
+            <button
+              className="absolute top-2 right-2"
+              onClick={() => handleRemoveFile(index)}
+              type="button"
             >
-              <UploadIcon className="h-6 w-6 text-muted-foreground" />
-              <span className="sr-only">Upload</span>
-              <input
-                type="file"
-                accept={acceptedFileTypes.join(",")}
-                multiple
-                className="absolute inset-0 opacity-0 cursor-pointer"
-                onChange={handleFileUpload}
-                disabled={isUploadDisabled}
-              />
-            </label>
-          )}
-        </div>
+              <RemoveIcon className="h-6 w-6" />
+            </button>
+          </div>
+        ))}
+
+        {/* Upload Button */}
+        {!isUploadDisabled && (
+          <label className="relative aspect-square bg-gray-50 flex items-center justify-center rounded-md border border-dashed">
+            <UploadIcon className="h-6 w-6 text-muted-foreground" />
+            <span className="sr-only">Upload</span>
+            <input
+              type="file"
+              accept={acceptedFileTypes.join(",")}
+              multiple
+              className="absolute inset-0 opacity-0 cursor-pointer"
+              onChange={handleFileUpload}
+            />
+          </label>
+        )}
 
         {/* Display error message if any */}
         {errorMessage && (

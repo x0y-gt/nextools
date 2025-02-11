@@ -149,7 +149,7 @@ const FileUploader = forwardRef(
         {fileItems.map((item, index) => (
           <div
             key={index}
-            className="relative aspect-square border border-gray-100"
+            className="flex relative aspect-square max-h-[180px] md:max-h-full overflow-hidden border border-gray-100"
           >
             <div className="relative flex items-center bg-gray-100">
               {item.preview ? (
@@ -176,7 +176,7 @@ const FileUploader = forwardRef(
 
         {/* Upload Button */}
         {!isUploadDisabled && (
-          <label className="relative aspect-square bg-gray-50 flex items-center justify-center rounded-md border border-dashed">
+          <label className="relative max-h-[180px] md:max-h-full md:w-full aspect-square bg-gray-50 flex items-center justify-center rounded-md border border-dashed">
             <UploadIcon className="h-6 w-6 text-muted-foreground" />
             <span className="sr-only">Upload</span>
             <input

@@ -77,7 +77,6 @@ export function createFieldComponent<TV extends FieldValues>(
 /* 1.1  Small helper hook – grabs the RHF control from context if not supplied */
 /* -------------------------------------------------------------------------- */
 function useRHFControl<T extends FieldValues>() {
-  const { useFormContext } = require("react-hook-form") as typeof import("react-hook-form");
   const ctx = useFormContext<T>();
   if (!ctx) {
     throw new Error(

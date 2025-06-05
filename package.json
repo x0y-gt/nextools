@@ -20,16 +20,6 @@
       "require": "./dist/@tnt/nextools/utils.cjs",
       "types": "./dist/@tnt/nextools/utils.d.ts"
     },
-    "./session": {
-      "import": "./dist/@tnt/nextools/session.js",
-      "require": "./dist/@tnt/nextools/session.cjs",
-      "types": "./dist/@tnt/nextools/session.d.ts"
-    },
-    "./auth": {
-      "import": "./dist/@tnt/nextools/auth.js",
-      "require": "./dist/@tnt/nextools/auth.cjs",
-      "types": "./dist/@tnt/nextools/auth.d.ts"
-    },
     "./location": {
       "import": "./dist/@tnt/nextools/location.js",
       "require": "./dist/@tnt/nextools/location.cjs",
@@ -70,6 +60,8 @@
     "iron-session": "^8.0.3",
     "node-ipinfo": "^3.5.3",
     "react-google-recaptcha": "^3.1.0",
+    "react-leaflet": "^4.3.1",
+    "leaflet": "^1.9.4",
     "react-hook-form": "^7.52.2",
     "rollup": "^4.21.0",
     "rollup-plugin-dts": "^6.1.1",

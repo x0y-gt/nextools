@@ -116,3 +116,20 @@ The response of the server action must be an object with the following propertie
 - status: The status of the form (idle, success, error)
 - message: A message to display in case of error
 - data: The data returned by the server in case of success
+
+## Location Picker
+
+This library includes a `LocationPicker` component built with the [react-leaflet](https://react-leaflet.js.org/) wrapper for OpenStreetMap. It allows users to select a location directly from an interactive map.
+
+```tsx
+import { LocationPicker } from "@tnt/nextools";
+
+export default function Example() {
+  return (
+    <LocationPicker
+      initialLocation={{ lat: 51.505, lng: -0.09 }}
+      onChange={(pos) => console.log(pos)}
+    />
+  );
+}
+```

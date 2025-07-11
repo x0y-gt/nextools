@@ -2,12 +2,11 @@
  * Calling this function will return true if the current device is a mobile or tablet device.
  */
 export function isMobile(): boolean {
-  if (typeof window !== "undefined") {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    return /android|ipad|iphone|ipod|windows phone|tablet/i.test(userAgent);
-  }
+  if (typeof navigator === "undefined") return false; // SSR / Node
 
-  return false;
+  const ua = navigator.userAgent || navigator.vendor || ""; // suficiente
+
+  return /android|ipad|iphone|ipod|windows phone|tablet/i.test(ua);
 }
 
 /**
@@ -18,6 +17,15 @@ export function isBrowser() {
   return typeof window !== "undefined";
 }
 
-export function mergeClasses(...classes: (string | string[])[]) {
-  return [...new Set(classes.flat().filter(Boolean))].join(" ");
+export function mergeClasses(
+  ...classes: (string | string[] | undefined)[]
+): string {
+  return [
+    ...new Set(
+      classes
+        .flat()
+        .map((cls) => (cls === undefined ? "undefined" : cls))
+        .filter(Boolean),
+    ),
+  ].join(" ");
 }

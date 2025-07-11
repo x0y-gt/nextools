@@ -11,13 +11,14 @@ const external = [
   "react-google-recaptcha",
   "react-icons",
   "aws-sdk",
+  "@hookform/resolvers",
 ];
 
 // TODO: delete all unnecessary .d.ts files in dist folder
 export default [
   {
     input: {
-      forms: "src/forms/index.ts",
+      forms: "src/form-helpers.ts",
       utils: "src/utils.ts",
       location: "src/location.tsx",
       recaptcha: "src/recaptcha/index.ts",
@@ -30,22 +31,25 @@ export default [
       {
         dir: "dist",
         format: "esm",
-        entryFileNames: "@tnt/nextools/[name].js",
-        // sourcemap: true,
+        entryFileNames: "nextools/[name].js",
+        // sourcemap: true, // Generate source maps for easier debugging
       },
       {
         dir: "dist",
         format: "cjs",
-        entryFileNames: "@tnt/nextools/[name].cjs",
-        // sourcemap: true,
+        entryFileNames: "nextools/[name].cjs",
+        // sourcemap: true, // Generate source maps for easier debugging
       },
     ],
     plugins: [typescript({ tsconfig: "./tsconfig.json" })],
     external,
+    watch: {
+      exclude: ["dist/**", "node_modules/**"],
+    },
   },
   {
     input: {
-      forms: "dist/forms/index.d.ts",
+      forms: "dist/form-helpers.d.ts",
       recaptcha: "dist/recaptcha/index.d.ts",
       utils: "dist/utils.d.ts",
       location: "dist/location.d.ts",
@@ -56,12 +60,13 @@ export default [
     },
     output: [
       {
-        dir: "dist",
+        dir: "dist/nextools",
         format: "es",
-        entryFileNames: "@tnt/nextools/[name].d.ts",
+        entryFileNames: "[name].d.ts",
       },
     ],
     plugins: [dts()],
     external,
+    watch: false,
   },
 ];
